@@ -1,27 +1,15 @@
-ESX = nil
-
-TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+local QBCore = exports['qb-core']:GetCoreObject()
 
 
-RegisterServerEvent('esx_makeitrain:pay')
-AddEventHandler('esx_makeitrain:pay', function(itemName)
-    local source = source
-    local xPlayer = ESX.GetPlayerFromId(source)
-    local price = 1000
-    if xPlayer.getMoney() >= price then
-        TriggerEvent('esx_makeitrain:TakeMoney', source, price)
+RegisterServerEvent('QB-MakeItRain:Server:Payment')
+AddEventHandler('QB-MakeItRain:Server:Payment', function()
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    local money = Player.Functions.GetMoney()
+    local price = Config.Payment
+    if money.cash >= price then
+        Player.Functions.RemoveMoney(price)
     else
-        local missingMoney = price - xPlayer.getMoney()
-        TriggerClientEvent('esx:showNotification', source, _U('not_enough', missingMoney))
+        TriggerClientEvent('QBCore:Notify', src, Lang:t('not_enough'))
     end
-end)
-
-AddEventHandler('esx_makeitrain:TakeMoney', function(source, price)
-    local source = source
-    local xPlayer = ESX.GetPlayerFromId(source)
-    xPlayer.removeMoney(price)
-    TriggerEvent('esx_addonaccount:getSharedAccount', 'society_unicorn', function(account)
-        account.addMoney(price)
-    end)
-    TriggerClientEvent('esx:showNotification', source, _U('tipped_dancer'))
 end)
