@@ -6,7 +6,7 @@ A simple stripper tipping script for FiveM.
 
 <del>This script works alongside the Vanilla Unicorn esx_unicornjob.</del>
 
-It adds a tipping area by the stage which takes $1000 from the money on hand of the user and places it in the Unicorn Society fund, whilst playing a 'make it rain' animation. Just a fun way to encourage tipping.
+It adds a tipping area by the stage which takes $800 from the money on hand of the user and places it in the <del>Unicorn Society fund</del>, whilst playing a 'make it rain' animation. Just a fun way to encourage tipping.
 
 You can edit the money taken in the config.lua - just change the local price to the price you'd prefer!
 
