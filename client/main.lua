@@ -18,7 +18,10 @@ CreateThread(function()
                 if distance < 3 then
                     --DrawText3D(vector3(Stage.x, Stage.y, Stage.z + 0.5), '[E] Make it rain', 0.4)
                     exports['qb-core']:DrawText('[E Make It rain]', 'left')
-					if IsControlJustReleased(0, 54) then 
+                    if IsControlJustReleased(0, 54) then
+                        local PlayerData = QBCore.Functions.GetPlayerData()
+                        local money = PlayerData.money.cash
+                        if money >= Config.Payment then 
                             exports['qb-core']:HideText()
                             RequestNamedPtfxAsset("core")
                             cash = CreateObject(GetHashKey("prop_cash_pile_01"), 0, 0, 0, true, true, true) 
@@ -35,6 +38,9 @@ CreateThread(function()
                             Wait(500)
                             DeleteEntity(cash)
                             TriggerServerEvent('QB-MakeItRain:Server:Payment')
+                        else
+                            QBCore.Functions.Notify(Lang:t('not_enough'), 'error', 7500)
+                        end
                     end
                 else
                     exports['qb-core']:HideText()
