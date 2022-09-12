@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'QB-MakeItRain
+description 'QB-MakeItRain'
 version '1.0.0'
 
 client_scripts {

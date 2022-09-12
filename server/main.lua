@@ -5,10 +5,10 @@ RegisterServerEvent('QB-MakeItRain:Server:Payment')
 AddEventHandler('QB-MakeItRain:Server:Payment', function()
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    local money = Player.Functions.GetMoney()
+    local money = Player.Functions.GetMoney('cash')
     local price = Config.Payment
-    if money.cash >= price then
-        Player.Functions.RemoveMoney(price)
+    if money >= price then
+        Player.Functions.RemoveMoney('cash', price)
     else
         TriggerClientEvent('QBCore:Notify', src, Lang:t('not_enough'))
     end

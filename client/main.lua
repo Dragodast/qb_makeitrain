@@ -4,7 +4,7 @@ local Stage = Config.Stage
 local function LoadAnimDict(lib)
     while (not HasAnimDictLoaded(lib)) do
         RequestAnimDict(lib)
-        Citizen.Wait(5)
+        Wait(5)
     end
 end
 
@@ -17,7 +17,7 @@ CreateThread(function()
             if not IsPedInAnyVehicle(PlayerPedId(), true) then
                 if distance < 3 then
                     --DrawText3D(vector3(Stage.x, Stage.y, Stage.z + 0.5), '[E] Make it rain', 0.4)
-                    exports['qb-core']:DrawText('[E Make It rain]', distance)
+                    exports['qb-core']:DrawText('[E Make It rain]', 'left')
 					if IsControlJustReleased(0, 54) then 
                             exports['qb-core']:HideText()
                             RequestNamedPtfxAsset("core")
@@ -35,9 +35,11 @@ CreateThread(function()
                             Wait(500)
                             DeleteEntity(cash)
                             TriggerServerEvent('QB-MakeItRain:Server:Payment')
-                        end
                     end
+                else
+                    exports['qb-core']:HideText()
                 end
             end
         end
-)
+    end
+end)
